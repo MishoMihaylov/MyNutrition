@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace MyNutrition.DataModels.Models
 {
     public class User
     {
-        //Add Picture
-
         public int Id { get; set; }
 
         [Required]
