@@ -55,7 +55,6 @@
     <Compile Include="Models\ServingSize.cs" />
     <Compile Include="Models\Sterols.cs" />
     <Compile Include="Models\Sugars.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vitamins.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

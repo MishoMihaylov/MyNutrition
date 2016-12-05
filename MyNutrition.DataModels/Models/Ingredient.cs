@@ -4,6 +4,11 @@ namespace MyNutrition.DataModels.Models
 {
     public class Ingredient
     {
+        public Ingredient()
+        {
+            this.ServingSize = new HashSet<ServingSize>();
+            this.Recipes = new HashSet<Recipe>();
+        }
         //Add Picture
 
         public int Id { get; set; }
@@ -30,10 +35,10 @@ namespace MyNutrition.DataModels.Models
 
         public Other Other { get; set; }
 
-        public virtual ICollection<ServingSize> ServingSize { get; set; }
-
         public IngredientType IngredientType { get; set; }
 
-        public Recipe Recipe { get; set; }
+        public virtual ICollection<ServingSize> ServingSize { get; set; }
+
+        public virtual ICollection<Recipe> Recipes { get; set; }
     }
 }

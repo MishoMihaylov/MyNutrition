@@ -7,11 +7,14 @@ namespace MyNutrition.DataModels.Models
     {
         //Add picture
 
+        public Recipe()
+        {
+            this.Ingredients = new HashSet<Ingredient>();
+        }
+
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public User RecipeAuthor { get; set; }
 
         public DateTime PreparationTime { get; set; }
 
@@ -23,7 +26,7 @@ namespace MyNutrition.DataModels.Models
 
         public RecipeType RecipeType { get; set; }
 
-        public virtual IEnumerable<Ingredient> Ingredients { get; set; }
+        public virtual ICollection<Ingredient> Ingredients { get; set; }
     }
 }
 
