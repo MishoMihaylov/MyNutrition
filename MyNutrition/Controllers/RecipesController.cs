@@ -16,9 +16,27 @@ namespace MyNutrition.Controllers
         private MyNutritionDbContext db = new MyNutritionDbContext();
 
         // GET: Recipes
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int? recipeType)
         {
-            return View(db.Recipes.ToList());
+            if (searchString != null && recipeType != null)
+            {
+                return
+                    this.View(this.db.Recipes.Where(r => r.Name.Contains(searchString) && r.RecipeType.Id == recipeType).Include(r => r.Ingredients));
+            }
+
+            if (searchString != null)
+            {
+                return
+                    this.View(this.db.Recipes.Where(r => r.Name.Contains(searchString)).Include(r => r.Ingredients));
+            }
+
+            if (recipeType != null)
+            {
+                return
+                    this.View(this.db.Recipes.Where(r => r.RecipeType.Id == recipeType).Include(r => r.Ingredients));
+            }
+
+            return this.View(this.db.Recipes.ToList());
         }
 
         // GET: Recipes/Details/5
