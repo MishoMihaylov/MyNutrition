@@ -36,7 +36,7 @@ namespace MyNutrition.Controllers
                     this.View(this.db.Recipes.Where(r => r.RecipeType.Id == recipeType).Include(r => r.Ingredients));
             }
 
-            return this.View(this.db.Recipes.ToList());
+            return this.View(this.db.Recipes.Include(r => r.Ingredients).ToList());
         }
 
         // GET: Recipes/Details/5

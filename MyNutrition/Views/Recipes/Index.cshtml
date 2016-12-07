@@ -50,6 +50,15 @@
                 @Html.DisplayFor(modelItem => item.ServingSize)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.ServingSize)
+            </td>
+            <td>
+                @foreach (var igredient in item.Ingredients)
+                {
+                    @Html.Display(igredient.Name);
+                }
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
