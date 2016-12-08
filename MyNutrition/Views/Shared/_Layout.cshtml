@@ -30,6 +30,25 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        @using (Html.BeginForm("Index", "Recipes", FormMethod.Get))
+            {
+            <div style="display: inline; float: left">
+                @Html.TextBox("SearchString", null, new { id = "text-box", size = "55" })
+                <br>
+                @Html.RadioButton("searchBy", "Recipe", true)
+
+                @Html.Label("Recipe", null, new { style = "font-weight:lighter" })
+
+                @Html.RadioButton("searchBy", "Ingredient")
+
+                @Html.Label("Ingredient", null, new { style = "font-weight:lighter" })
+            </div>
+            <div style="display: inline">
+                <input type="submit" value="Search" id="search-button" />
+            </div>
+        }
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
