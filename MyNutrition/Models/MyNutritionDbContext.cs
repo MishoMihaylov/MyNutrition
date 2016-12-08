@@ -27,7 +27,7 @@ namespace MyNutrition.Models
 
         public DbSet<Ingredient> Ingredients { get; set; }
 
-        public DbSet<IngredientType> IngredientType { get; set; }
+        public DbSet<IngredientType> IngredientTypes { get; set; }
 
         public DbSet<Minerals> Minerals { get; set; }
 

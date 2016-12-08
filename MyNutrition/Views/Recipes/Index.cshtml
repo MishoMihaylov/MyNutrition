@@ -30,6 +30,9 @@
                 @Html.DisplayNameFor(model => model.ServingSize)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Ingredients)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th></th>
@@ -50,13 +53,12 @@
                 @Html.DisplayFor(modelItem => item.ServingSize)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ServingSize)
-            </td>
-            <td>
-                @foreach (var igredient in item.Ingredients)
-                {
-                    @Html.Display(igredient.Name);
-                }
+                <ul>
+                    @foreach (var igredient in item.Ingredients)
+                    {
+                        <li>@igredient.Name</li>
+                    }
+                </ul>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)

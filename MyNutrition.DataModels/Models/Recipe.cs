@@ -16,9 +16,9 @@ namespace MyNutrition.DataModels.Models
 
         public string Name { get; set; }
 
-        public DateTime PreparationTime { get; set; }
-
-        public DateTime CookingTime { get; set; }
+        public int PreparationTime { get; set; }
+               
+        public int CookingTime { get; set; }
 
         public int ServingSize { get; set; }
 
