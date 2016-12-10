@@ -6,12 +6,14 @@ namespace MyNutrition.DataModels.Models
     {
         public int Id { get; set; }
 
-        public float FromCarbohydrate { get; set; }
+        public int Overall { get; set; }
 
-        public float FromFats { get; set; }
+        //public float FromCarbohydrate { get; set; }
 
-        public float FromProtein { get; set; }
+        //public float FromFats { get; set; }
 
-        public float FromAlcohol { get; set; }
+        //public float FromProtein { get; set; }
+
+        //public float FromAlcohol { get; set; }
     }
 }

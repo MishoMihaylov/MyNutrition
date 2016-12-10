@@ -6,8 +6,8 @@ namespace MyNutrition.DataModels.Models
     {
         public int Id { get; set; }
         
-        public float Cholesterol { get; set; }
+        //public float Cholesterol { get; set; }
 
-        public float Phytosterols { get; set; }
+        //public float Phytosterols { get; set; }
     }
 }
