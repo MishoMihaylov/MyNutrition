@@ -17,25 +17,25 @@ namespace MyNutrition.DataModels.Models
 
         public int BaseServingSize { get; set; }  //For 100 grams
 
-        public Calories Calories { get; set; }
-
-        public Protein Protein { get; set; }
-
-        public Carbohydrates Carbohydrates { get; set; }
-
-        public Fats Fats { get; set; }
-
-        public FattyAcids FattyAcids { get; set; }
-
-        public Vitamins Vitamins { get; set; }
-
-        public Minerals Minerals { get; set; }
-
-        public Sterols Sterols { get; set; }
-
-        public Other Other { get; set; }
-
-        public IngredientType IngredientType { get; set; }
+        public virtual Calories Calories { get; set; }
+                
+        public virtual Protein Protein { get; set; }
+                
+        public virtual Carbohydrates Carbohydrates { get; set; }
+                
+        public virtual Fats Fats { get; set; }
+                
+        public virtual FattyAcids FattyAcids { get; set; }
+                
+        public virtual Vitamins Vitamins { get; set; }
+                
+        public virtual Minerals Minerals { get; set; }
+                
+        public virtual Sterols Sterols { get; set; }
+                
+        public virtual Other Other { get; set; }
+                
+        public virtual IngredientType IngredientType { get; set; }
 
         public virtual ICollection<ServingSize> ServingSize { get; set; }
 

@@ -54,6 +54,10 @@ namespace MyNutrition.Controllers
             }
 
             ViewBag.IngredientAmounts = recipe.IngredientAmounts;
+
+            var nutrients = this.CalculateNutritionValues(recipe);
+            ViewBag.NutritionInfo = nutrients;
+
             return View(recipe);
         }
 
@@ -144,6 +148,63 @@ namespace MyNutrition.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private Dictionary<string, int> CalculateNutritionValues(Recipe recipe)
+        {
+            var nutrients = new Dictionary<string, int>();
+            nutrients.Add("Calories", 0);
+            nutrients.Add("Protein", 0);
+            nutrients.Add("Carbohidrates", 0);
+            nutrients.Add("Saturated Fat", 0);
+            nutrients.Add("Monounsaturated Fat", 0);
+            nutrients.Add("Polyunsaturated Fat", 0);
+            nutrients.Add("Fatty Acids", 0);
+            nutrients.Add("Vitamin A", 0);
+            nutrients.Add("Vitamin C", 0);
+            nutrients.Add("Calcium", 0);
+            nutrients.Add("Iron", 0);
+            nutrients.Add("Magnesium", 0);
+
+            foreach (var ingredient in recipe.IngredientAmounts)
+            {
+                double coefficient = ingredient.Amount / (double)ingredient.Ingredient.BaseServingSize;
+
+                nutrients["Calories"] += ingredient.Ingredient.Calories != null ? (int)(ingredient.Ingredient.Calories.Overall * coefficient) : 0;
+                nutrients["Protein"] += ingredient.Ingredient.Protein != null ? (int)(ingredient.Ingredient.Protein.Overall * coefficient) : 0;
+                nutrients["Carbohidrates"] += ingredient.Ingredient.Carbohydrates != null ? (int)(ingredient.Ingredient.Carbohydrates.Overall() * coefficient) : 0;
+
+                if (ingredient.Ingredient.Fats != null)
+                {
+                    nutrients["Saturated Fat"] += (int)(ingredient.Ingredient.Fats.SaturatedFat * coefficient);
+                    nutrients["Monounsaturated Fat"] += (int)(ingredient.Ingredient.Fats.MonounsaturatedFat * coefficient);
+                    nutrients["Polyunsaturated Fat"] += (int)(ingredient.Ingredient.Fats.PolyunsaturatedFat * coefficient);
+                }
+
+                nutrients["Fatty Acids"] += ingredient.Ingredient.FattyAcids != null ? (int)(ingredient.Ingredient.FattyAcids.Overall() * coefficient) : 0;
+
+                if (ingredient.Ingredient.Vitamins != null)
+                {
+                    nutrients["Vitamin A"] += (int)(ingredient.Ingredient.Vitamins.A * coefficient);
+                    nutrients["Vitamin C"] += (int)(ingredient.Ingredient.Vitamins.C * coefficient);
+                }
+
+                if (ingredient.Ingredient.Minerals != null)
+                {
+                    nutrients["Calcium"] += (int)(ingredient.Ingredient.Minerals.Calcium * coefficient);
+                    nutrients["Iron"] += (int)(ingredient.Ingredient.Minerals.Iron * coefficient);
+                    nutrients["Magnesium"] += (int)(ingredient.Ingredient.Minerals.Magnesium * coefficient);
+                }
+
+            }
+
+            var keys = nutrients.Keys.ToList();
+            foreach (var key in keys)
+            {
+                nutrients[key] /= recipe.ServingSize;
+            }
+
+            return nutrients;
         }
     }
 }

@@ -18,5 +18,10 @@ namespace MyNutrition.DataModels.Models
 
         public float Galactose { get; set; }
 
+        public int Overall()
+        {
+            return (int)(this.Sucrose + this.Glucose + this.Fructose + this.Lactose + this.Maltose + this.Galactose);
+        }
+
     }
 }
