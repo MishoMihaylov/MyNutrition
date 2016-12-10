@@ -1,7 +1,7 @@
 ﻿@model System.Collections.Generic.IEnumerable<MyNutrition.DataModels.Models.Recipe>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -68,9 +68,10 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    @if (User.IsInRole("Admin")) {
+                        @:| @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    }
                 </td>
             </tr>
         }

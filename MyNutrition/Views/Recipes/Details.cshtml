@@ -1,7 +1,7 @@
 ﻿@model MyNutrition.DataModels.Models.Recipe
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -17,11 +17,11 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Name)
+                
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Name)
+                <h3>@Html.DisplayFor(model => model.Name)</h3>
             </dd>
     
             <dt>
@@ -29,7 +29,7 @@
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.PreparationTime)
+                @Html.DisplayFor(model => model.PreparationTime) mins
             </dd>
     
             <dt>
@@ -37,7 +37,7 @@
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.CookingTime)
+                @Html.DisplayFor(model => model.CookingTime) mins
             </dd>
     
             <dt>
@@ -55,11 +55,22 @@
             <dd>
                 @Html.DisplayFor(model => model.Description)
             </dd>
-    
+            <dt>
+                @Html.DisplayNameFor(model => model.IngredientAmounts)
+            </dt>
+
+            <dd>
+                <ul>
+                    @foreach (var ingredient in ViewBag.IngredientAmounts)
+                    {
+                        <li>@ingredient.Ingredient.Name - @ingredient.Amount grams</li>
+                    }
+                </ul>
+
+            </dd>
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
 </body>

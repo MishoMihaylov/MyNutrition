@@ -46,6 +46,7 @@
     <Compile Include="Models\Fats.cs" />
     <Compile Include="Models\FattyAcids.cs" />
     <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\IngredientAmount.cs" />
     <Compile Include="Models\IngredientType.cs" />
     <Compile Include="Models\Minerals.cs" />
     <Compile Include="Models\Other.cs" />
