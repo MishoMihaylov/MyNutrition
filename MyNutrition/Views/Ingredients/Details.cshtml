@@ -1,0 +1,126 @@
+﻿@model MyNutrition.DataModels.Models.Ingredient
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Ingredient</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @*@Html.DisplayNameFor(model => model.Name)*@
+            </dt>
+    
+            <dd>
+                <h3>@Html.DisplayFor(model => model.Name)</h3>
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.BaseServingSize)
+            </dt>
+
+            <dd> 
+                @Html.DisplayFor(model => model.BaseServingSize) g
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Calories)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Calories.Overall) kcal 
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Protein)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Protein.Overall) g
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Carbohydrates)
+            </dt>
+
+            <dd>
+                Dietary Fiber - @Html.DisplayFor(model => model.Carbohydrates.DietaryFiber) g
+                <dd>Starch - @Html.DisplayFor(model => model.Carbohydrates.Starch) g</dd>
+                <dd>Sugars - @Html.DisplayFor(model => model.Carbohydrates.Sugars.Overall) g</dd>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Fats)
+            </dt>
+
+            <dd>
+                Monounsaturated Fat - @Html.DisplayFor(model => model.Fats.MonounsaturatedFat) g,
+                <dd>Polyunsaturated Fat - @Html.DisplayFor(model => model.Fats.PolyunsaturatedFat) g,</dd>
+                <dd>Saturated Fat - @Html.DisplayFor(model => model.Fats.SaturatedFat) g</dd>
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Fatty Acids")
+            </dt>
+
+            <dd>
+                Omega 3 - @Html.DisplayFor(model => model.FattyAcids.Omega3)
+                <dd>Omega 6 - @Html.DisplayFor(model => model.FattyAcids.Omega6)</dd>
+                <dd>Total - @Html.DisplayFor(model => model.FattyAcids.Overall)</dd>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Vitamins)
+            </dt>
+
+            <dd>
+                Vitamin A: @Html.DisplayFor(model => model.Vitamins.A) g;
+                Vitamin B6: @Html.DisplayFor(model => model.Vitamins.B6) g;
+                Vitamin B12: @Html.DisplayFor(model => model.Vitamins.B12) g;
+                Betaine: @Html.DisplayFor(model => model.Vitamins.Betaine) g;
+                Vitamin C: @Html.DisplayFor(model => model.Vitamins.C) g;
+                Choline: @Html.DisplayFor(model => model.Vitamins.Choline) g;
+                Vitamin D: @Html.DisplayFor(model => model.Vitamins.D) g;
+                Vitamin E: @Html.DisplayFor(model => model.Vitamins.E) g;
+                Folate: @Html.DisplayFor(model => model.Vitamins.Folate) g;
+                Vitamin K: @Html.DisplayFor(model => model.Vitamins.K) g;
+                Niacin 0: @Html.DisplayFor(model => model.Vitamins.Niacin0) g;
+                Pantothenic Acid: @Html.DisplayFor(model => model.Vitamins.PantothenicAcid) g;
+                Thiamin: @Html.DisplayFor(model => model.Vitamins.Thiamin) g;
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Minerals)
+            </dt>
+
+            <dd>
+                Calcium: @Html.DisplayFor(model => model.Minerals.Calcium) g;
+                Copper: @Html.DisplayFor(model => model.Minerals.Copper) g;
+                Fluoride: @Html.DisplayFor(model => model.Minerals.Fluoride) g;
+                Iron: @Html.DisplayFor(model => model.Minerals.Iron) g;
+                Magnesium: @Html.DisplayFor(model => model.Minerals.Magnesium) g;
+                Manganese: @Html.DisplayFor(model => model.Minerals.Manganese) g;
+                Phosphorus: @Html.DisplayFor(model => model.Minerals.Phosphorus) g;
+                Potassium: @Html.DisplayFor(model => model.Minerals.Potassium) g;
+                Selenium: @Html.DisplayFor(model => model.Minerals.Selenium) g;
+                Sodium: @Html.DisplayFor(model => model.Minerals.Sodium) g;
+                Zinc: @Html.DisplayFor(model => model.Minerals.Zinc) g;
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

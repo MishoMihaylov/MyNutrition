@@ -172,7 +172,7 @@ namespace MyNutrition.Controllers
 
                 nutrients["Calories"] += ingredient.Ingredient.Calories != null ? (int)(ingredient.Ingredient.Calories.Overall * coefficient) : 0;
                 nutrients["Protein"] += ingredient.Ingredient.Protein != null ? (int)(ingredient.Ingredient.Protein.Overall * coefficient) : 0;
-                nutrients["Carbohidrates"] += ingredient.Ingredient.Carbohydrates != null ? (int)(ingredient.Ingredient.Carbohydrates.Overall() * coefficient) : 0;
+                nutrients["Carbohidrates"] += ingredient.Ingredient.Carbohydrates != null ? (int)(ingredient.Ingredient.Carbohydrates.Overall * coefficient) : 0;
 
                 if (ingredient.Ingredient.Fats != null)
                 {
@@ -181,7 +181,7 @@ namespace MyNutrition.Controllers
                     nutrients["Polyunsaturated Fat"] += (int)(ingredient.Ingredient.Fats.PolyunsaturatedFat * coefficient);
                 }
 
-                nutrients["Fatty Acids"] += ingredient.Ingredient.FattyAcids != null ? (int)(ingredient.Ingredient.FattyAcids.Overall() * coefficient) : 0;
+                nutrients["Fatty Acids"] += ingredient.Ingredient.FattyAcids != null ? (int)(ingredient.Ingredient.FattyAcids.Overall * coefficient) : 0;
 
                 if (ingredient.Ingredient.Vitamins != null)
                 {

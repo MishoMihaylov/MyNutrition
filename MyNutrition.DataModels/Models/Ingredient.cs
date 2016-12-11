@@ -2,12 +2,17 @@
 
 namespace MyNutrition.DataModels.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class Ingredient
     {
+        private ICollection<ServingSize> servingSize;
+        private ICollection<Recipe> recipes;
+
         public Ingredient()
         {
-            this.ServingSize = new HashSet<ServingSize>();
-            this.Recipes = new HashSet<Recipe>();
+            this.servingSize = new HashSet<ServingSize>();
+            this.recipes = new HashSet<Recipe>();
         }
         //Add Picture
 
@@ -15,6 +20,7 @@ namespace MyNutrition.DataModels.Models
 
         public string Name { get; set; }
 
+        [Display(Name = "Base Serving Size")]
         public int BaseServingSize { get; set; }  //For 100 grams
 
         public virtual Calories Calories { get; set; }
@@ -37,8 +43,16 @@ namespace MyNutrition.DataModels.Models
                 
         public virtual IngredientType IngredientType { get; set; }
 
-        public virtual ICollection<ServingSize> ServingSize { get; set; }
+        public virtual ICollection<ServingSize> ServingSize
+        {
+            get { return this.servingSize; }
+            set { this.servingSize = value; }
+        }
 
-        public virtual ICollection<Recipe> Recipes { get; set; }
+        public virtual ICollection<Recipe> Recipes
+        {
+            get { return this.recipes; }
+            set { this.recipes = value; }
+        }
     }
 }

@@ -10,9 +10,9 @@ namespace MyNutrition.DataModels.Models
 
         public float Omega6 { get; set; }
 
-        public int Overall()
+        public int Overall
         {
-            return (int)(this.Omega3 + this.Omega6);
+            get { return (int) (this.Omega3 + this.Omega6); }
         }
     }
 }

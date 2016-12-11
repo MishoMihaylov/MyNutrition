@@ -23,9 +23,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                     <li>@Html.ActionLink("Browse Recipes", "Index", "Recipes")</li>
+                    <li>@Html.ActionLink("Browse Ingredients", "Index", "Ingredients")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -45,7 +44,7 @@
 
                 @Html.Label("Ingredient", null, new { style = "font-weight:lighter" })*@
             </div>
-            <div style="display: inline"; float: left; >
+            <div style="display: inline; float: left;" >
                 <input type="submit" value="Go" id="search-button" />
             </div>
         }
@@ -54,7 +53,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - My Nutrition</p>
         </footer>
     </div>
 
