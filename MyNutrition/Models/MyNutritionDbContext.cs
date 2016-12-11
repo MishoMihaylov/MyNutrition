@@ -47,6 +47,8 @@ namespace MyNutrition.Models
 
         public DbSet<Vitamins> Vitamins { get; set; }
 
-        public DbSet<IngredientAmount> IngredientAmounts { get; set; }
+	public DbSet<IngredientAmount> IngredientAmounts { get; set; }
+
+        public DbSet<DayConsumation> DayConsumation { get; set; }
     }
 }

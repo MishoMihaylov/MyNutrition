@@ -15,7 +15,8 @@ namespace MyNutrition.Models
     {
         public MyNutritionUser() : base()
         {
-            this.Recipes = new HashSet<Recipe>();
+            //this.Recipes = new HashSet<Recipe>();
+            this.DayConsumations = new HashSet<DayConsumation>();
         }
 
         [StringLength(50)]
@@ -28,10 +29,12 @@ namespace MyNutrition.Models
 
         public int Phone { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime CreatedOn { get; set; }
+        //[Column(TypeName = "date")]
+        //public DateTime CreatedOn { get; set; }
 
-        public ICollection<Recipe> Recipes { get; set; }
+        //public ICollection<Recipe> Recipes { get; set; }
+        
+        public virtual ICollection<DayConsumation> DayConsumations { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<MyNutritionUser> manager)
         {
