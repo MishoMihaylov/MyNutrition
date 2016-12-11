@@ -16,24 +16,17 @@ namespace MyNutrition.Controllers
         private MyNutritionDbContext db = new MyNutritionDbContext();
 
         // GET: Recipes
-        public ActionResult Index(string searchString, int? recipeType)
+        public ActionResult Index(string searchString, string searchBy)
         {
-            if (searchString != null && recipeType != null)
+            if (searchBy == "Ingredient")
             {
-                return
-                    this.View(this.db.Recipes.Where(r => r.Name.Contains(searchString) && r.RecipeType.Id == recipeType).Include(r => r.Ingredients));
+                return this.RedirectToAction("Index", "Ingredients", new { searchStr = searchString });
             }
 
             if (searchString != null)
             {
                 return
                     this.View(this.db.Recipes.Where(r => r.Name.Contains(searchString)).Include(r => r.Ingredients));
-            }
-
-            if (recipeType != null)
-            {
-                return
-                    this.View(this.db.Recipes.Where(r => r.RecipeType.Id == recipeType).Include(r => r.Ingredients));
             }
 
             return this.View(this.db.Recipes.Include(r => r.Ingredients).ToList());
@@ -62,10 +55,10 @@ namespace MyNutrition.Controllers
         }
 
         // GET: Recipes/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
         //// POST: Recipes/Create
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 

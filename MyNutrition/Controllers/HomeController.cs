@@ -15,6 +15,8 @@ namespace MyNutrition.Controllers
 
             MyNutritionDbContext db = new MyNutritionDbContext();
 
+            this.ViewBag.Recipes = db.Recipes.Take(3);
+
             db.Protein.Add(new Protein());
             db.SaveChanges();
 
