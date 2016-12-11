@@ -8,6 +8,6 @@
 
         public int Size { get; set; }
 
-        public Ingredient Ingredient { get; set; }
+        public virtual Ingredient Ingredient { get; set; }
     }
 }

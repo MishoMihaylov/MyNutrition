@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MyNutrition.Models;
+using System.Collections.Generic;
+using MyNutrition.DataModels.Models;
+using System.Web.Script.Serialization;
 
 namespace MyNutrition.Controllers
 {
@@ -136,7 +139,6 @@ namespace MyNutrition.Controllers
             }
         }
 
-        //
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
@@ -144,7 +146,6 @@ namespace MyNutrition.Controllers
             return View();
         }
 
-        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -174,7 +175,6 @@ namespace MyNutrition.Controllers
             return View(model);
         }
 
-        //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
@@ -187,7 +187,6 @@ namespace MyNutrition.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
-        //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
         public ActionResult ForgotPassword()
@@ -195,7 +194,6 @@ namespace MyNutrition.Controllers
             return View();
         }
 
-        //
         // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
@@ -223,7 +221,6 @@ namespace MyNutrition.Controllers
             return View(model);
         }
 
-        //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
@@ -231,7 +228,6 @@ namespace MyNutrition.Controllers
             return View();
         }
 
-        //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
@@ -239,7 +235,6 @@ namespace MyNutrition.Controllers
             return code == null ? View("Error") : View();
         }
 
-        //
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
@@ -265,7 +260,6 @@ namespace MyNutrition.Controllers
             return View();
         }
 
-        //
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
@@ -273,7 +267,6 @@ namespace MyNutrition.Controllers
             return View();
         }
 
-        //
         // GET: /Account/SendCode
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
@@ -288,7 +281,6 @@ namespace MyNutrition.Controllers
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
         // POST: /Account/SendCode
         [HttpPost]
         [AllowAnonymous]
@@ -308,7 +300,6 @@ namespace MyNutrition.Controllers
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
-        //
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -318,9 +309,53 @@ namespace MyNutrition.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
         public ActionResult Statistics()
         {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult GetStatistics(int daysBack = 2)
+        {
+            if (daysBack < 0)
+            {
+                throw new ArgumentException("This software is not designed to see the future -_-.");
+            }
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                throw new Exception("Authentication problem.");
+            }
+
+
+            MyNutritionDbContext db = new MyNutritionDbContext();
+
+            var user = db.Users.Where(u => u.UserName == User.Identity.Name)
+                .Single();
+
+            var userConsumation = user.DayConsumations
+                .Where(dc => dc.Date >= DateTime.Now.AddDays(-daysBack))
+                .OrderBy(dc => dc.Date)
+                .ToList();
+            
+            if(userConsumation.Count == 0)
+            {
+                return null;
+            }
+
+            var result = userConsumation
+                .Select(currDay => new
+                {
+                    Date = currDay.Date != null ? currDay.Date.ToShortDateString() : "null",
+                    Calories = currDay.DayCalories != null ? currDay.DayCalories.Overall : 0,
+                    Proteins = currDay.DayProteins != null ? currDay.DayProteins.Overall : 0,
+                    Vitamins = currDay.DayVitamins != null ? currDay.DayVitamins : null,
+                    Minerals = currDay.DayMinerals != null ? currDay.DayMinerals : null
+                })
+                .ToList();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         #region Helpers

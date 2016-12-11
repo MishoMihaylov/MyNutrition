@@ -1,7 +1,17 @@
-﻿
-@{
-    ViewBag.Title = "Statistics";
-}
+﻿@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/scripts/statistics.js")
 
-<div id="chart"></div>
+<h1>Statistics</h1>
 
+<div>
+    <span>Statistics for past how many days?</span>
+    <input type="text" id="days" />
+    <input type="button" value="Get Statistics" onclick="LoadStatistics($('#days').val())" />
+    <br />
+    <h3>Calories</h3>
+    <div id="caloriesChart"></div>
+    <h3>Proteins</h3>
+    <div id="proteinsChart"></div>
+    <h3>Vitamins</h3>
+    <div id="vitaminsChart"></div>
+</div>

@@ -18,9 +18,9 @@ namespace MyNutrition.DataModels.Models
 
         public float Thiamin { get; set; }
 
-        public float Riboflavin0 { get; set; }
+        public float Riboflavin { get; set; }
 
-        public float Niacin0 { get; set; }
+        public float Niacin { get; set; }
 
         public float B6 { get; set; }
 
