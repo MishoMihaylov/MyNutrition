@@ -7,12 +7,17 @@
 <div class="row">
     @foreach (var item in ViewBag.Recipes)
     {
-        <div class="col-md-4">
+        <div class="col-md-3">
             <h2>@item.Name</h2>
-            <p>
-                Recipe Picture
-            </p>
-            <p><a class="btn btn-default" href="@Url.Content("/Recipes/Details/?id=" + item.Id)">Go to recipe &raquo;</a>
+
+            @if (item.Image != null)
+            {
+                <p>
+                    <img alt="Recipe Image" id="recipe-image" src="@Url.Content("/Recipes/RecipeImage?id=" + item.Id)" />
+                </p>
+            }
+
+            <p><a id="search-button" href="@Url.Content("/Recipes/Details/?id=" + item.Id)">Go to recipe &raquo;</a>
             </p>
         </div>
     }

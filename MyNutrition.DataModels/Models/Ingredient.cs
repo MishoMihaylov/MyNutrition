@@ -3,6 +3,7 @@
 namespace MyNutrition.DataModels.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Ingredient
     {

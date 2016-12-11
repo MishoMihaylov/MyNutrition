@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyNutrition.DataModels.Models
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class Recipe
     {
         //Add picture
@@ -14,6 +16,9 @@ namespace MyNutrition.DataModels.Models
         }
 
         public int Id { get; set; }
+
+        [Column(TypeName = "image")]
+        public byte[] Image { get; set; }
 
         [Display(Name = "Recipe Title")]
         public string Name { get; set; }

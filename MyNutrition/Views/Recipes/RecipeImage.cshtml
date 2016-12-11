@@ -1,0 +1,11 @@
+﻿@model MyNutrition.DataModels.Models.Recipe
+
+@{
+    if (Model.Image != null)
+    {
+        WebImage wi = new WebImage(Model.Image);
+        wi.Resize(300, 200, true, true);
+
+        wi.Write();
+    }
+}

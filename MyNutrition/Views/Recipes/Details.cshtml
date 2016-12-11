@@ -16,11 +16,11 @@
         <h2>@Html.DisplayFor(model => model.Name)</h2>
         <hr />
         <dl class="dl-horizontal">
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.PreparationTime)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.PreparationTime) mins
             </dd>
@@ -32,21 +32,13 @@
             <dd>
                 @Html.DisplayFor(model => model.CookingTime) mins
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.ServingSize)
             </dt>
     
             <dd>
                 @Html.DisplayFor(model => model.ServingSize)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Description)
             </dd>
 
             <dt>
@@ -57,9 +49,17 @@
                 <ul>
                     @foreach (var ingredient in ViewBag.IngredientAmounts)
                     {
-                        <li>@ingredient.Ingredient.Name - @ingredient.Amount grams</li>
+                        <li>@ingredient.Amount g @ingredient.Ingredient.Name</li>
                     }
                 </ul>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
             </dd>
 
             <dt>
@@ -77,7 +77,8 @@
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "Index") |
+        @Html.ActionLink("Ate This!", "AteThis", "Account", new { id = Model.Id }, new { servSize = Model.ServingSize })
     </p>
 </body>
 </html>

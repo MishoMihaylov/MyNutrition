@@ -85,7 +85,7 @@
                 Vitamin E: @Html.DisplayFor(model => model.Vitamins.E) g;
                 Folate: @Html.DisplayFor(model => model.Vitamins.Folate) g;
                 Vitamin K: @Html.DisplayFor(model => model.Vitamins.K) g;
-                Niacin 0: @Html.DisplayFor(model => model.Vitamins.Niacin0) g;
+                Niacin: @Html.DisplayFor(model => model.Vitamins.Niacin0) g;
                 Pantothenic Acid: @Html.DisplayFor(model => model.Vitamins.PantothenicAcid) g;
                 Thiamin: @Html.DisplayFor(model => model.Vitamins.Thiamin) g;
             </dd>
@@ -95,24 +95,24 @@
             </dt>
 
             <dd>
-                Calcium: @Html.DisplayFor(model => model.Minerals.Calcium) g;
-                Copper: @Html.DisplayFor(model => model.Minerals.Copper) g;
-                Fluoride: @Html.DisplayFor(model => model.Minerals.Fluoride) g;
-                Iron: @Html.DisplayFor(model => model.Minerals.Iron) g;
-                Magnesium: @Html.DisplayFor(model => model.Minerals.Magnesium) g;
-                Manganese: @Html.DisplayFor(model => model.Minerals.Manganese) g;
-                Phosphorus: @Html.DisplayFor(model => model.Minerals.Phosphorus) g;
-                Potassium: @Html.DisplayFor(model => model.Minerals.Potassium) g;
-                Selenium: @Html.DisplayFor(model => model.Minerals.Selenium) g;
-                Sodium: @Html.DisplayFor(model => model.Minerals.Sodium) g;
-                Zinc: @Html.DisplayFor(model => model.Minerals.Zinc) g;
+                @Html.DisplayNameFor(model => model.Minerals.Calcium): @Html.DisplayFor(model => model.Minerals.Calcium) g;
+                @Html.DisplayNameFor(model => model.Minerals.Copper): @Html.DisplayFor(model => model.Minerals.Copper) g;
+                @Html.DisplayNameFor(model => model.Minerals.Fluoride): @Html.DisplayFor(model => model.Minerals.Fluoride) g;
+                @Html.DisplayNameFor(model => model.Minerals.Iron): @Html.DisplayFor(model => model.Minerals.Iron) g;
+                @Html.DisplayNameFor(model => model.Minerals.Magnesium): @Html.DisplayFor(model => model.Minerals.Magnesium) g;
+                @Html.DisplayNameFor(model => model.Minerals.Manganese): @Html.DisplayFor(model => model.Minerals.Manganese) g;
+                @Html.DisplayNameFor(model => model.Minerals.Phosphorus): @Html.DisplayFor(model => model.Minerals.Phosphorus) g;
+                @Html.DisplayNameFor(model => model.Minerals.Potassium): @Html.DisplayFor(model => model.Minerals.Potassium) g;
+                @Html.DisplayNameFor(model => model.Minerals.Selenium): @Html.DisplayFor(model => model.Minerals.Selenium) g;
+                @Html.DisplayNameFor(model => model.Minerals.Sodium): @Html.DisplayFor(model => model.Minerals.Sodium) g;
+                @Html.DisplayNameFor(model => model.Minerals.Zinc): @Html.DisplayFor(model => model.Minerals.Zinc) g;
             </dd>
 
         </dl>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+<p>
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink("Ate This!", "AteThis", "Account", new { id = Model.Id }, new { servSize = Model.BaseServingSize })
+</p>
 </body>
 </html>

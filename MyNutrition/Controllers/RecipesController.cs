@@ -143,6 +143,13 @@ namespace MyNutrition.Controllers
             base.Dispose(disposing);
         }
 
+        // GET: Recipes/RecipeImage/
+        public ActionResult RecipeImage(int id)
+        {
+            Recipe recipe = this.db.Recipes.Find(id);
+            return this.View(recipe);
+        }
+
         private Dictionary<string, int> CalculateNutritionValues(Recipe recipe)
         {
             var nutrients = new Dictionary<string, int>();
