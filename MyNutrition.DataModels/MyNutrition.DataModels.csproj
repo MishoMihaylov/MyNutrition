@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="Models\Calories.cs" />
     <Compile Include="Models\Carbohydrates.cs" />
+    <Compile Include="Models\DayConsumation.cs" />
+    <Compile Include="Models\DayConsumationRecipe.cs" />
+    <Compile Include="Models\DayConsumptionIngredient.cs" />
     <Compile Include="Models\Fats.cs" />
     <Compile Include="Models\FattyAcids.cs" />
     <Compile Include="Models\Ingredient.cs" />
