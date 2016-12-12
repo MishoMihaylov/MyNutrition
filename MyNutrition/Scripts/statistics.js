@@ -16,6 +16,14 @@ function LoadStatistics(currentDaysback) {
         url: "/Account/GetStatistics",
         data: { daysBack: currentDaysback },
         success: function (result) {
+
+            if (!result) {
+                $("#caloriesChart").text("No Calories info available.");
+                $("#proteinsChart").text("No Proteins info available.");
+                $("#vitaminsChart").text("No Vitamins info available.");
+                return;
+            }
+
             var dates = [];
             var calories = [];
             var proteins = [];
