@@ -168,7 +168,7 @@ namespace MyNutrition.Controllers
 
             foreach (var ingredient in recipe.IngredientAmounts)
             {
-                double coefficient = ingredient.Amount / (double)ingredient.Ingredient.BaseServingSize;
+                double coefficient = ingredient.ServingSize / (double)ingredient.Ingredient.BaseServingSize;
 
                 nutrients["Calories"] += ingredient.Ingredient.Calories != null ? (int)(ingredient.Ingredient.Calories.Overall * coefficient) : 0;
                 nutrients["Protein"] += ingredient.Ingredient.Protein != null ? (int)(ingredient.Ingredient.Protein.Overall * coefficient) : 0;

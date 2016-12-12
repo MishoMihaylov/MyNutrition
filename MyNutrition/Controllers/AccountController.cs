@@ -55,7 +55,6 @@ namespace MyNutrition.Controllers
             }
         }
 
-        //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -71,8 +70,6 @@ namespace MyNutrition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            string a = "asd";
-
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -96,7 +93,6 @@ namespace MyNutrition.Controllers
             }
         }
 
-        //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
@@ -109,7 +105,6 @@ namespace MyNutrition.Controllers
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
         // POST: /Account/VerifyCode
         [HttpPost]
         [AllowAnonymous]
@@ -356,6 +351,90 @@ namespace MyNutrition.Controllers
                 .ToList();
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult AteThis(int id, int servSize, bool isRecipe)
+        {
+            MyNutritionDbContext db = new MyNutritionDbContext();
+            DayConsumation dayConsumption;
+            if (db.Users.Where(user => user.UserName == User.Identity.Name).Single().DayConsumations.Where(dc => dc.Date.Date == DateTime.Now.Date).Count() == 0)
+            {
+                dayConsumption = new DayConsumation()
+                {
+                    Date = DateTime.Now,
+                    DayCalories = new Calories(),
+                    //DayCarbohydrates = new Carbohydrates(),
+                    //DayFats = new Fats(),
+                    //DayMinerals = new Minerals(),
+                    DayProteins = new Protein(),
+                    DayVitamins = new Vitamins()
+                };
+                db.Users.Where(user => user.UserName == User.Identity.Name).Single().DayConsumations.Add(dayConsumption);
+            }
+            else
+            {
+                dayConsumption = db.Users
+                    .Where(user => user.UserName == User.Identity.Name)
+                    .Single()
+                    .DayConsumations.Where(dc => dc.Date.Date == DateTime.Now.Date)
+                    .Single();
+            }
+
+            if (isRecipe)
+            {
+                Recipe recipe = db.Recipes.Where(r => r.Id == id).Single();
+
+                foreach (var item in recipe.Ingredients)
+                {
+                    dayConsumption.DayCalories.Overall += item.Calories.Overall * (item.BaseServingSize / 100);
+                    dayConsumption.DayProteins.Overall += item.Protein.Overall * (item.BaseServingSize / 100);
+                    dayConsumption.DayVitamins.A += item.Vitamins.A * (item.BaseServingSize / 100);
+                    dayConsumption.DayVitamins.B12 += item.Vitamins.B12 * (item.BaseServingSize / 100);
+                    dayConsumption.DayVitamins.B6 += item.Vitamins.B6 * (item.BaseServingSize / 100);
+                    dayConsumption.DayVitamins.Betaine += item.Vitamins.Betaine * (item.BaseServingSize / 100);
+                    dayConsumption.DayVitamins.C += item.Vitamins.C * (item.BaseServingSize / 100);
+                    dayConsumption.DayVitamins.D += item.Vitamins.D * (item.BaseServingSize / 100);
+                    dayConsumption.DayVitamins.E += item.Vitamins.E * (item.BaseServingSize / 100);
+                    dayConsumption.DayVitamins.Choline += item.Vitamins.Choline * (item.BaseServingSize / 100);
+                    dayConsumption.DayVitamins.Folate += item.Vitamins.Folate * (item.BaseServingSize / 100);
+                    dayConsumption.DayVitamins.K += item.Vitamins.K * (item.BaseServingSize / 100);
+                    dayConsumption.DayVitamins.Niacin += item.Vitamins.Niacin * (item.BaseServingSize / 100);
+                    dayConsumption.DayVitamins.PantothenicAcid += item.Vitamins.PantothenicAcid * (item.BaseServingSize / 100);
+                    dayConsumption.DayVitamins.Riboflavin += item.Vitamins.Riboflavin * (item.BaseServingSize / 100);
+                    dayConsumption.DayVitamins.Thiamin += item.Vitamins.Thiamin * (item.BaseServingSize / 100);
+                }
+            }
+            else
+            {
+                Ingredient ingredient = db.Ingredients.Where(i => i.Id == id).Single();
+
+                dayConsumption.DayCalories.Overall += ingredient.Calories.Overall * (servSize / 100);
+                dayConsumption.DayProteins.Overall += ingredient.Protein.Overall * (servSize / 100);
+                dayConsumption.DayVitamins.A += ingredient.Vitamins.A * (servSize / 100);
+                dayConsumption.DayVitamins.B12 += ingredient.Vitamins.B12 * (servSize / 100);
+                dayConsumption.DayVitamins.B6 += ingredient.Vitamins.B6 * (servSize / 100);
+                dayConsumption.DayVitamins.Betaine += ingredient.Vitamins.Betaine * (servSize / 100);
+                dayConsumption.DayVitamins.C += ingredient.Vitamins.C * (servSize / 100);
+                dayConsumption.DayVitamins.D += ingredient.Vitamins.D * (servSize / 100);
+                dayConsumption.DayVitamins.E += ingredient.Vitamins.E * (servSize / 100);
+                dayConsumption.DayVitamins.Choline += ingredient.Vitamins.Choline * (servSize / 100);
+                dayConsumption.DayVitamins.Folate += ingredient.Vitamins.Folate * (servSize / 100);
+                dayConsumption.DayVitamins.K += ingredient.Vitamins.K * (servSize / 100);
+                dayConsumption.DayVitamins.Niacin += ingredient.Vitamins.Niacin * (servSize / 100);
+                dayConsumption.DayVitamins.PantothenicAcid += ingredient.Vitamins.PantothenicAcid * (servSize / 100);
+                dayConsumption.DayVitamins.Riboflavin += ingredient.Vitamins.Riboflavin * (servSize / 100);
+                dayConsumption.DayVitamins.Thiamin += ingredient.Vitamins.Thiamin * (servSize / 100);
+            }
+
+            db.SaveChanges();
+
+            if (isRecipe)
+            {
+                return RedirectToAction("Index", "Recipes");
+            }
+
+            return RedirectToAction("Index", "Ingredients");
+
         }
 
         #region Helpers

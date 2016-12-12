@@ -65,7 +65,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Details", "Details", new {id = item.Id}) |
-                    @Html.ActionLink("Ate This", "AteThis", "Account", new { id = item.Id }, new { servSize = item.ServingSize })
+                    @Html.ActionLink("Ate This", "AteThis", "Account", new { id = item.Id, servSize = item.ServingSize, isRecipe = true }, null)
                     @if (User.IsInRole("Admin")) {
                         @:| @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     }

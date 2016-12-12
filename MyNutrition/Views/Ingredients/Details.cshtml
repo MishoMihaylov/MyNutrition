@@ -111,8 +111,12 @@
         </dl>
     </div>
 <p>
-    @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink("Ate This!", "AteThis", "Account", new { id = Model.Id }, new { servSize = Model.BaseServingSize })
+    @Html.ActionLink("Back to List", "Index") 
+    @if (User.Identity.IsAuthenticated)
+    {
+        <span>|</span>
+        @Html.ActionLink("Ate This", "AteThis", "Account", new { id = Model.Id, servSize = Model.BaseServingSize, isRecipe = false }, null)
+    }
 </p>
 </body>
 </html>

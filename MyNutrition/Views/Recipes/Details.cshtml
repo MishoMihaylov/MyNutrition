@@ -49,7 +49,7 @@
                 <ul>
                     @foreach (var ingredient in ViewBag.IngredientAmounts)
                     {
-                        <li>@ingredient.Amount g @ingredient.Ingredient.Name</li>
+                        <li>@ingredient.ServingSize g @ingredient.Ingredient.Name</li>
                     }
                 </ul>
             </dd>
@@ -78,7 +78,8 @@
     </div>
     <p>
         @Html.ActionLink("Back to List", "Index") |
-        @Html.ActionLink("Ate This!", "AteThis", "Account", new { id = Model.Id }, new { servSize = Model.ServingSize })
+        @Html.ActionLink("Ate This", "AteThis", "Account", new { id = Model.Id, servSize = Model.ServingSize, isRecipe = true }, null)
+
     </p>
 </body>
 </html>
