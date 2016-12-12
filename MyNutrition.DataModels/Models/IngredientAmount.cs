@@ -17,6 +17,6 @@ namespace MyNutrition.DataModels.Models
         [ForeignKey("RecipeId")]
         public virtual Recipe Recipe { get; set; }
 
-        public int Amount { get; set; }
+        public int ServingSize { get; set; }
     }
 }

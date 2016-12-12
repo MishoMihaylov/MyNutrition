@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyNutrition.DataModels.Models
@@ -14,7 +15,7 @@ namespace MyNutrition.DataModels.Models
 
         public int Id { get; set; }
 
-        [Index(IsUnique = true)] //To be made for date only
+        [Column(TypeName = "Date")]
         public virtual DateTime Date { get; set; }
 
         public virtual Protein DayProteins { get; set; }
